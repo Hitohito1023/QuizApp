@@ -1,8 +1,11 @@
 package com.example.quizapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private String rightAnswer;
     private int rightAnswerCount;
     private int quizCount = 1;
+    static final private int QUIZ_COUNT = 5;
 
     ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
 
@@ -89,7 +93,39 @@ public class MainActivity extends AppCompatActivity {
         answerBtn4.setText(quiz.get(3));
 
         quizArray.remove(randomNum);
-
-
     }
+
+    public void checkAnswer(View view) {
+        Button answerBtn = findViewById(view.getId());
+        String btnText = answerBtn.getText().toString();
+
+        String alertTitle;
+        if (btnText.equals(rightAnswer)) {
+            alertTitle = "正解！";
+            rightAnswerCount++;
+        } else {
+            alertTitle = "不正解...";
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(alertTitle);
+        builder.setMessage("答え：" + rightAnswer);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (quizCount == QUIZ_COUNT) {
+
+                } else {
+                    quizCount++;
+                    showNextQuiz();
+                }
+            }
+        });
+
+        builder.setCancelable(false);
+        builder.show();
+    }
+
+
+
 }
