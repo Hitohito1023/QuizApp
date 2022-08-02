@@ -6,6 +6,6 @@
 
     <string name="result_title">結果</string>
     <string name="result_score">%d / 5</string>
-    <string name="resutl_total_score">トータルスコア : %d</string>
+    <string name="result_total_score">トータルスコア : %d</string>
     <string name="btn_return">もどる</string>
 </resources>
